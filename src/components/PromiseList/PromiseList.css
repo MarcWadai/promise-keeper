@@ -1,0 +1,14 @@
+.promise-list-wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: #ead2ac;
+    display: flex;
+    flex-wrap: wrap;
+    columns: 5;
+}
+
+.card-wrapper {
+    max-width: 30vw;
+    display:block;
+    margin: 8px;
+}
