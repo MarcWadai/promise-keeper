@@ -4,6 +4,7 @@
     background-color: #ead2ac;
     display: flex;
     flex-wrap: wrap;
+    align-content: baseline;
     columns: 5;
 }
 
@@ -11,4 +12,32 @@
     max-width: 30vw;
     display:block;
     margin: 8px;
+}
+
+/*animations */
+.card-enter {
+    opacity: 0.01;
+  }
+  
+.card-enter.card-enter-active {
+    opacity: 0.6;
+    transition: opacity 2000ms ease-in;
+}
+
+.card-leave {
+    opacity: 1;
+}
+
+.card-leave.card-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
+
+.card-appear {
+    opacity: 0.01;
+  }
+  
+.card-appear.card-appear-active {
+opacity: 1;
+transition: opacity .5s ease-in;
 }

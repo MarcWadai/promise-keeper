@@ -3,34 +3,46 @@ import './App.css';
 import PromiseInput from './components/PromiseInput/PromiseInput';
 import PromiseList from'./components/PromiseList/PromiseList';
 import PromiseHeader from'./components/PromiseHeader/PromiseHeader';
+import {connect} from 'react-redux';
+import { addPromise } from './store/actions';
+import PropTypes from 'prop-types'
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      promiseList : []
-    }
+
+  componentDidMount() {
+    console.log('this.props.promiseList app.js', this.props.promiseList);
   }
 
-  receivePromiseToAdd(promise) {
-    console.log('promise to add in app.js', promise);
-    this.setState({
-      promiseList: this.state.promiseList.concat(promise)
-    })
-    
-    console.log('promise to add in app.js', this.state.promiseList);
+  componentDidCatch(error, info){
+    console.log('error:', error, 'info:', info);
   }
-
 
   render() {
     return (
       <div className="App">
         <PromiseHeader className="promise-header"></PromiseHeader>
-        <PromiseInput className="promise-top" callbackPromiseParent={(prom) => this.receivePromiseToAdd(prom)}></PromiseInput>
-        <PromiseList promiseList={this.state.promiseList} className="promise-bottom"></PromiseList>
+        <PromiseInput className="promise-top" callbackPromiseParent={(prom) => this.props.receivePromiseToAdd(prom)}></PromiseInput>
+        <PromiseList promiseList={this.props.promises} className="promise-bottom"></PromiseList>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) { 
+  return {
+      promises: state.promises
+    };
+} 
+
+function mapDispatchToProps(dispatch) {
+  return { 
+      receivePromiseToAdd: promise => {
+        dispatch(addPromise(promise))
+      }
+    };
+} 
+
+export default connect( 
+  mapStateToProps, 
+    mapDispatchToProps 
+)(App);
